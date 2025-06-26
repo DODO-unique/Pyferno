@@ -1,0 +1,208 @@
+
+🟩 1. Core Python Concepts (Reforge Zone)
+These are your steel. Weakness here means failure everywhere else.
+
+🔹 Syntax, Data Types, Expressions
+Primitive types: int, float, bool, str, complex
+
+Collection types: list, tuple, dict, set, frozenset
+
+Comprehensions: list / dict / set
+
+Slicing, unpacking, packing (*, **, starred expressions)
+
+Truthy/falsy behavior
+
+🔹 Variables, Scope, and Namespaces
+LEGB rule
+
+global, nonlocal, shadowing
+
+id(), is, ==, mutability vs immutability
+
+🔹 Functions & Call Mechanics
+*args, **kwargs, default params, keyword-only args
+
+Closures, inner functions
+
+return, yield, yield from
+
+Lambda, first-class functions
+
+🔹 Errors & Exceptions
+try, except, else, finally
+
+raise, custom exceptions
+
+Exception chaining: raise ... from ...
+
+with and context managers (__enter__, __exit__)
+
+🟨 2. Object-Oriented Python (The Art of Structure)
+This is how you build complexity that doesn’t become a dumpster fire.
+
+🔹 Classes & Objects
+__init__, __repr__, __str__, __del__, __eq__, __hash__
+
+Properties, setters, @property
+
+Class vs instance attributes
+
+🔹 Inheritance & Composition
+Inheritance, super(), MRO, diamond problem
+
+Composition over inheritance
+
+🔹 Method Types
+Instance, classmethod, staticmethod
+
+Overriding, __getattr__, __getattribute__
+
+🔹 Encapsulation & Dunder Magic
+Name mangling: _name, __name
+
+Dunder methods: __len__, __call__, __contains__, etc.
+
+🟦 3. Functional & Modern Python (The Sorcery Layer)
+Write smaller, faster, cleaner code with less noise.
+
+🔹 Functional Programming
+map, filter, reduce, zip, enumerate
+
+Higher-order functions
+
+Closures (properly)
+
+Decorators — with args, nesting, chaining
+
+🔹 Iterators & Generators
+__iter__, __next__
+
+yield, generator functions
+
+Generator expressions vs list comprehensions
+
+🔹 Context Managers
+with, contextlib, contextmanager
+
+Manual vs built-in
+
+🟪 4. Python Internals & Metaprogramming (Master Tier)
+You want to reverse engineer libraries? Then know the beast inside.
+
+🔹 Object Model
+__dict__, __slots__
+
+Descriptors: __get__, __set__, __delete__
+
+How attributes are resolved (MRO, super() stack)
+
+🔹 Memory & Performance
+Reference counting, GC, gc module
+
+sys.getsizeof, tracemalloc, timeit
+
+🔹 Bytecode & Introspection
+dis module, inspecting compiled bytecode
+
+inspect, getattr, hasattr, callable
+
+🔹 Metaclasses
+type, __new__, __init__ for metaclasses
+
+Custom class factories
+
+🟥 5. Tooling & Ecosystem (Real-World Readiness)
+This is how Python goes from toy to tool.
+
+🔹 Environments & Packaging
+venv, pip, requirements.txt
+
+pyproject.toml, setuptools, wheel, twine
+
+Creating + publishing a pip package
+
+🔹 Formatting & Linting
+black, isort, flake8, pylint
+
+🔹 Logging & CLI
+logging, log levels, handlers
+
+argparse, click, typer — for CLI tools
+
+🔹 Testing
+unittest, pytest, fixtures, mocks
+
+tox, coverage
+
+🟧 6. DSA & Algorithms (The FAANG Core)
+This is your swordplay. Fight or die.
+
+🔹 Fundamentals
+Time/Space complexity, Big-O
+
+Arrays, strings, sliding window
+
+Recursion, two pointers, hash maps
+
+🔹 Intermediate
+Linked lists, stacks, queues
+
+Trees (binary, BST), DFS, BFS
+
+Sorting algorithms
+
+🔹 Advanced
+Heaps, Tries, Graphs (DFS/BFS/Dijkstra/Kruskal)
+
+Dynamic programming
+
+Bit manipulation
+
+🟫 7. Backend & Automation (Real Deployment)
+This is how you ship actual useful things.
+
+🔹 Backend APIs
+Flask, FastAPI
+
+Routing, request/response models
+
+Templates, serving static files
+
+🔹 Database Interaction
+sqlite3, SQLAlchemy
+
+ORM concepts
+
+Alembic for migrations
+
+🔹 Async Programming
+async, await, asyncio, aiohttp
+
+Event loop, coroutines
+
+🔹 Automation & Parsing
+File I/O, JSON, CSV, YAML
+
+os, shutil, glob, pathlib
+
+schedule, watchdog
+
+🧠 8. Data/ML (Side Weapon)
+You already have an ML brain, this is for implementation speed.
+
+🔹 Libraries
+pandas, numpy, matplotlib
+
+scikit-learn, xgboost, lightgbm
+
+transformers, torch, datasets
+
+🔹 Topics
+Data loading & cleaning
+
+Feature engineering
+
+Model training, evaluation
+
+Pipelines and joblib
