@@ -14,6 +14,8 @@
 5. Inspecting callables: `__code__`, `__defaults__`, `__annotations__`
 6. `locals()`, `globals()`, `vars()`: Contextual introspection
 
+Note: Can create a utility that gives object data
+
 ---
 
 ### **III. Execution of Code as Data**
