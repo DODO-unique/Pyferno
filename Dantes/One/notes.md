@@ -47,3 +47,114 @@ Or in raccoon terms:
 > **How I act depends on what I carry and where I’m stuck.**
 
 ---
+
+## Types:
+### Primitive Types: Six of them, all immutables
+
+1. `int` is whole numbers, immutable- can't change it, if changed, it creates a new instance. Integer interns from -5 to 256- cached
+2. `float` follow IEEE 754, decimal pointers, too precise for humans sometimes because `0.1 + 0.2 != 0.3`
+3. `str`; array of unicode, basically. Immutable, if altered creates new instance of string.
+4. `bool` subclass of `int`, intuitive, simply 0 and 1 wrapped in True and False.
+5. `None` nonthing, ille, nada, nope. Singleton, represents void, and all that, we will get into details
+6. `bytes` raw data good for those DSA byte problems. Juicy af
+
+### `int`
+
+* we will talk about how int works behind the scenes:
+    ```c
+    typedef struct {
+    PyObject_HEAD   // Macro: includes ref count, type info, etc.
+    long ob_digit[]; // Flexible array member holding the digits of the number
+    } PyLongObject;
+    ```
+* Here, basically, we are storing long integers as different elements of array, where each element is a `long`.
+* Python simply adds them up later. It looks like this:
+    ```c
+    2176782336 * (2^0) +
+    287445236  * (2^30) +
+    2          * (2^60)
+    = original big number
+    ```
+* Here, each number is added to create a bigger number
+
+### `float`
+
+* It is a IEEE 754 double (IEEE is electrical engineering peeps. yeah.)
+* precision is ~15-17 decimals
+* 0.smth does not have a clean binary, so ... suffer this: `0.1 + 0.2 != 0.3` (it is actually `0.30000000000000004`)
+* special values: float('inf') or float('-inf'), and float('nan') and nan = not a number, and `nan != nan`. yeah, how would nothing be equal to nothing? Because you have nothing to compare it to.
+* Safer Alternative: decimal.Decimal, fractions.Fraction
+
+###  `str` 
+
+* A `str` in Python is a **sequence of Unicode code points**.
+* These code points are compiled and loaded as **immutable** string objects.
+* Despite being immutable, strings are **highly optimized** — slicing and copies are cheap at the C level.
+
+---
+
+### Slicing
+
+Yes, **you can slice strings**, and every slice gives you a **new string** — it’s not a view or a reference.
+
+---
+
+#### Syntax
+
+```python
+s[start : end : step]
+```
+
+* `start`: where to begin (inclusive)
+* `end`: where to stop (exclusive)
+* `step`: how many characters to skip (defaults to 1)
+
+Missing values (`None`) get auto-filled:
+
+* `s[:]` → full string
+* `s[::-1]` → reversed
+* `s[::2]` → every 2nd character
+
+---
+
+#### Internally: slice object
+
+Python desugars slicing into a `slice()` object:
+
+```python
+s[1:4:2]  →  s.__getitem__(slice(1, 4, 2))
+```
+
+Then internally Python does:
+
+```python
+slice(1, 4, 2).indices(len(s))
+→ (1, 4, 2)
+```
+
+So it knows:
+
+> “Start at 1, end before 4, step by 2 — go!”
+
+---
+
+#### Example
+
+```python
+s = "hello"
+s[::]  →  'hello'
+# equivalent to: s[slice(None, None, 1)]
+# slice(None, None, 1).indices(5) → (0, 5, 1)
+```
+
+Meaning: `"start at 0, stop before 5, go by 1"`
+
+---
+
+### 🔄 TL;DR:
+
+* Slicing returns a new string
+* Python internally uses `slice(start, stop, step)`
+* `slice().indices(len)` normalizes `None` and negative values
+* It's all sugar over a surprisingly smart mechanism
+
