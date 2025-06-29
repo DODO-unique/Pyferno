@@ -24,6 +24,7 @@ Welcome to the Regex Sanctum — where symbols are explained, trauma is tamed, a
 | `\D`   | Non-digit                        |
 | `\s`   | Whitespace (space, tab, newline) |
 | `\S`   | Non-whitespace                   |
+| `\b`   | boundary between \w and \W       |
 
 ---
 
@@ -82,6 +83,8 @@ Welcome to the Regex Sanctum — where symbols are explained, trauma is tamed, a
 
 ```python
 import re
+re.match(pattern, string)      # The start until it doesn't
+re.fullmatch(pattern, string)  # entire match
 re.search(pattern, string)     # First match
 re.findall(pattern, string)    # All matches
 re.sub(pattern, repl, string)  # Replace matches
@@ -99,8 +102,3 @@ Use **raw strings**: `r'\d+'` to avoid hell with double escaping.
 * ✅ Test patterns on [regex101.com](https://regex101.com/)
 * 🔍 Anchor your regex with `^...$` if you want full-line validation
 
----
-
-This is your regex shield. Modify it, tattoo it, worship it. Just don’t forget it.
-
-Let me know if you want a second doc for **pattern recipes** or **regex debugging** rituals.
