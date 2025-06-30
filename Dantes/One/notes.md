@@ -68,61 +68,7 @@ But CPython, the default, doesn’t do JIT—because it can't safely assume anyt
 
 ### Slicing
 
-Yes, **you can slice strings**, and every slice gives you a **new string** — it’s not a view or a reference.
-
----
-
-#### Syntax
-
-```python
-s[start : end : step]
-```
-
-* `start`: where to begin (inclusive)
-* `end`: where to stop (exclusive)
-* `step`: how many characters to skip (defaults to 1)
-
-Missing values (`None`) get auto-filled:
-
-* `s[:]` → full string
-* `s[::-1]` → reversed
-* `s[::2]` → every 2nd character
-
----
-
-#### Internally: slice object
-
-Python desugars slicing into a `slice()` object:
-
-```python
-s[1:4:2]  →  s.__getitem__(slice(1, 4, 2))
-```
-
-Then internally Python does:
-
-```python
-slice(1, 4, 2).indices(len(s))
-→ (1, 4, 2)
-```
-
-So it knows:
-
-> “Start at 1, end before 4, step by 2 — go!”
-
----
-
-#### Example
-
-```python
-s = "hello"
-s[::]  →  'hello'
-# equivalent to: s[slice(None, None, 1)]
-# slice(None, None, 1).indices(5) → (0, 5, 1)
-```
-
-Meaning: `"start at 0, stop before 5, go by 1"`
-
----
+> refer slicing.md in Dantes/Zero/code/
 
 ### 🔄 TL;DR:
 
