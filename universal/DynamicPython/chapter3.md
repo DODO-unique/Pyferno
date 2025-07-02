@@ -250,4 +250,7 @@ This works because:
 - don't go smth = exec(smthelse), you'd look dumb with a NoneType
 - answer = eval(smth) gives you legit answer though
 - be careful how and where you use this. With great power comes...
+- exec is not a function or an object
+- eval is a object and a function
 ---
+
