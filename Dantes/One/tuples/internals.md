@@ -18,11 +18,11 @@ What are hashtables? [read this](Dantes\Zero\hashtables.md)
 
 We dive into: PyTupleObject
 
-Here, basically, CPython adds each element of a tuple in a array like:
+Here, basically, CPython adds each element of a tuple in an array like:
 
-    ```c
-    PyObject *ob_item[1];
-    ```
+```c
+PyObject *ob_item[1];
+```
 So, each element in a tuple's body is 
     
     1. a python object
