@@ -14,7 +14,7 @@ tup2 = 1,[2,0]
 hash(tup1) # This hashes it into a numerical format (which allocates a index in memory)
 hash(tup2) #TypeError: unhashable type: 'list'
 ```
-What are hashtables? [read this](Dantes\Zero\hashtables.md)
+What are hashtables? [read this](..\..\universal\low-level\hashtables.md)
 
 We dive into: PyTupleObject
 

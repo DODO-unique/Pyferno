@@ -1,3 +1,6 @@
+But this somewhere in the dictionaries or the sets to be sure. Or both, don't mind
+
+
 This hashing is not cryptography hashing, remember that.
 
 The key concept is to take a hashable object (an object that supports __hash__() method- so mutables are shown the middle finger) and convert it into a number (let's call it Shivali [dad suggested that name])
