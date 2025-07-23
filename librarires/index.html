@@ -1,0 +1,107 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title></title>
+        </head>
+        <body>
+            <style type="text/css">
+                head, body{
+    background-color: rgb(24, 37, 61);
+    margin: 0;
+    height: 100vh;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.🧍‍♂️{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 35%;
+    width: 35%;
+    border: 10px solid rgb(206, 64, 39);
+    background-color: rgb(35, 52, 83);
+}
+
+.noActive{
+    display: none;
+}
+
+.🎉{
+    font-size: 4rem;
+    color: rgb(236, 69, 139);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.date{
+    height: 50px;
+    width: 200px;
+    box-shadow: 10px, 10px, black;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(180, 142, 86);
+    transition: transform 1.0s, border-radius 1s;
+    border: 0;
+}
+
+.date:hover{
+    transform: scale(1.2);
+    border-radius: 15px;
+}
+
+.btn{
+    height: 50px;
+    width: 200px;
+    box-shadow: 10px, 10px, black;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(204, 78, 55);
+    transition: transform 0.5s, border-radius 1s;
+    border: 0;
+}
+
+.btn:hover{
+    transform: scale(1.2);
+    border-radius: 15px;
+}
+
+.btn:active{
+    transform: scale(0.9);
+}
+            </style>
+        <div class="🧍‍♂️ 👀">   
+            <input type="date" id="date" class="date">
+            <button id="btn" class="btn">submit!</button>
+        </div>
+        <div class="🎉 👀 noActive">
+            <text id="birthday" class="birthday">Happy Birthday! 🎉</text>
+        </div>
+        </body>
+        <script>
+            const date = document.getElementById("date");
+
+
+const btn = document.getElementById("btn");
+
+btn.addEventListener(
+    "click", () => {
+        const dateStr = date.value;
+        console.log(dateStr)
+
+        if (dateStr === "2025-07-23"){
+        const active = document.querySelectorAll(".👀")
+        active.forEach(
+            eyes => {
+                eyes.classList.toggle("noActive")
+            }
+        )
+        }
+    }
+)
+        </script>
+    </html>
