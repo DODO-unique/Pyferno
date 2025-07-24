@@ -86,3 +86,56 @@ This happens because when multiplying the same pointers are multipled (and remem
 
 So, now, how would you define a tuple in advanced? 
 “A Python tuple is a fixed-length PyTupleObject that stores only pointers to its elements in a contiguous C array (ob_item[]). It doesn’t own the elements’ memory, only references them. Lists work similarly but keep extra space for resizing, while sets and dicts use hash tables.” 
+
+You can say the same for others
+
+At the **C level (CPython)**, a tuple is represented as a `PyTupleObject`, which is essentially:
+
+```c
+struct _PyTupleObject {
+    PyObject_VAR_HEAD        // Standard Python object header (type, refcount, length)
+    PyObject *ob_item[1];    // Flexible array member (pointers to elements)
+};
+```
+
+So for:
+
+```python
+tup = (1, 2, 3)
+```
+
+CPython allocates memory like:
+
+```
+[PyTupleObject header][pointer to 1][pointer to 2][pointer to 3]
+```
+
+Each pointer (`ob_item[i]`) points to the actual Python objects (`PyLongObject` for 1, 2, 3).
+The tuple **does not own or copy** the integers—it just holds references.
+The header (`PyObject_VAR_HEAD`) tracks:
+
+* The type (tuple type object),
+* Reference count,
+* And `ob_size` (the number of elements, here 3).
+
+So conceptually, `tup` in memory is something like:
+
+```
+(PyTupleObject)
+ ├─ ob_size = 3
+ ├─ ob_item[0] -> PyLongObject(1)
+ ├─ ob_item[1] -> PyLongObject(2)
+ └─ ob_item[2] -> PyLongObject(3)
+```
+
+No extra slots (unlike lists, which over-allocate).
+If you call `sys.getsizeof(tup)`, you’re only seeing the header + space for **three pointers**—not the `PyLongObject`s themselves.
+
+And since tuples have `ob_size` like elements in the header, functions like len(tup) work faster since they simply read ob_size- which is not true for lists.
+
+**namedtuple** is a tuple used liike a class.
+
+so from collections, you import namedtuple, this thing looks like this:
+
+ClassName = namedtuple('Alias', ['value1', 'value2'])
+ 
