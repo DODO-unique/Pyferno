@@ -46,3 +46,24 @@ So,
 
 As mentioned in [tuples](..\..\Dantes\One\tuples\internals.md), tuples with mutable elements are not hashable.
 
+
+Note that probing itself is a very complicated process mathematically, here is how perturbing helps make it sharper:
+
+### **Raccoon Drama**
+
+1. **You (Victor) hash to 3.**
+   Bin 3 is empty. You dump your mango peels there. Easy.
+
+2. **Shivali the raccoon hashes to 3 too.**
+   Collision. Bin 3 is full. She sighs and starts **perturbed probing**:
+
+   * Start with `i = 3`, `perturb = hash(Shivali)`.
+   * New index: `j = (3 * 5 + 1 + perturb) & 15`.
+   * She lands at, say, bin 10. Bin 10 is free, she dumps her rotten litchis there.
+
+3. **Another raccoon, “Trashlord”, also hashes to 3.**
+   Now he has to follow the same dance:
+
+   * Start at 3, sees it full, then hops like a lunatic across bins (`i = (i * 5 + 1 + perturb) & 15`, shifting `perturb` each time) until he finds a free one.
+
+bit of 15 is 1111, which means the next is just 10000, so technically 
