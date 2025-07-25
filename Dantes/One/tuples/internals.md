@@ -138,4 +138,43 @@ And since tuples have `ob_size` like elements in the header, functions like len(
 so from collections, you import namedtuple, this thing looks like this:
 
 ClassName = namedtuple('Alias', ['value1', 'value2'])
- 
+
+```py
+Point = namedtuple('Helo', ['x','y'])
+
+p = Point(11,12)
+
+print(p)    # this prints Helo(x=10, y=20)
+```
+
+in OOP it would loook like this:
+```python
+class Helo(tuple):
+    __slots__ = ()  # no per-instance dict, saves memory
+
+    # field names
+    _fields = ('x', 'y')
+
+    def __new__(cls, x, y):
+        # Use tuple's __new__ to make an immutable tuple (x, y)
+        return super().__new__(cls, (x, y))
+
+    # Property accessors (syntactic sugar)
+    @property
+    def x(self):
+        return self[0]
+
+    @property
+    def y(self):
+        return self[1]
+
+    def __repr__(self):
+        return f"Helo(x={self.x}, y={self.y})"
+
+
+# Usage:
+p = Helo(10, 20)
+print(p)        # Helo(x=10, y=20)
+print(p.x)      # 10
+print(p[0])     # 10 (still a tuple)
+```
