@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x1f9e0; The &DiacriticalGrave;random&DiacriticalGrave; module in Python</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h2 id="-the-random-module-in-python">🧠 The <code>random</code> module in Python</h2>
+<pre><code class="language-python"><span class="hljs-keyword">import</span> random
+</code></pre>
+<p>This imports the pseudo-random number generator. <em>Pseudo</em>, because nothing is truly random—Python uses a deterministic algorithm seeded from your system clock or entropy pool.</p>
+<hr>
+<h3 id="-basic-randomness">🎲 BASIC RANDOMNESS</h3>
+<h4 id="1-randomrandom">1. <code>random.random()</code></h4>
+<p>Returns a float in the range <code>[0.0, 1.0)</code>.</p>
+<pre><code class="language-python">random.random()  <span class="hljs-comment"># e.g. 0.732773</span>
+</code></pre>
+<h4 id="2-randomuniforma-b">2. <code>random.uniform(a, b)</code></h4>
+<p>Returns a float between <code>a</code> and <code>b</code>.</p>
+<pre><code class="language-python">random.uniform(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)  <span class="hljs-comment"># e.g. 7.2841</span>
+</code></pre>
+<h4 id="3-randomrandinta-b">3. <code>random.randint(a, b)</code></h4>
+<p>Returns an integer between <code>a</code> and <code>b</code>, <strong>inclusive</strong>.</p>
+<pre><code class="language-python">random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>)  <span class="hljs-comment"># simulates a die roll</span>
+</code></pre>
+<h4 id="4-randomrandrangestart-stop-step">4. <code>random.randrange(start, stop[, step])</code></h4>
+<p>Like <code>range()</code>, but picks one value randomly.</p>
+<pre><code class="language-python">random.randrange(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span>)  <span class="hljs-comment"># could return 0, 2, 4, 6, or 8</span>
+</code></pre>
+<hr>
+<h3 id="-choice-shuffle-and-sample">🎴 CHOICE, SHUFFLE, AND SAMPLE</h3>
+<h4 id="5-randomchoiceseq">5. <code>random.choice(seq)</code></h4>
+<p>Pick a single element from a non-empty sequence.</p>
+<pre><code class="language-python">random.choice([<span class="hljs-string">&#x27;apple&#x27;</span>, <span class="hljs-string">&#x27;banana&#x27;</span>, <span class="hljs-string">&#x27;cherry&#x27;</span>])
+</code></pre>
+<h4 id="6-randomchoicesseq-kn">6. <code>random.choices(seq, k=n)</code></h4>
+<p>Return a list of <code>n</code> elements <em>with replacement</em>. Can have duplicates.</p>
+<pre><code class="language-python">random.choices([<span class="hljs-string">&#x27;red&#x27;</span>, <span class="hljs-string">&#x27;green&#x27;</span>, <span class="hljs-string">&#x27;blue&#x27;</span>], k=<span class="hljs-number">2</span>)
+</code></pre>
+<h4 id="7-randomsampleseq-kn">7. <code>random.sample(seq, k=n)</code></h4>
+<p>Returns <code>n</code> unique elements. <strong>No replacement</strong>.</p>
+<pre><code class="language-python">random.sample(<span class="hljs-built_in">range</span>(<span class="hljs-number">100</span>), <span class="hljs-number">5</span>)  <span class="hljs-comment"># 5 unique numbers</span>
+</code></pre>
+<h4 id="8-randomshuffleseq">8. <code>random.shuffle(seq)</code></h4>
+<p>Shuffles a sequence <strong>in-place</strong>.</p>
+<pre><code class="language-python">deck = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
+random.shuffle(deck)  <span class="hljs-comment"># modifies deck</span>
+</code></pre>
+<hr>
+<h3 id="-controlling-the-chaos">🎰 CONTROLLING THE CHAOS</h3>
+<h4 id="9-randomseedx">9. <code>random.seed(x)</code></h4>
+<p>Sets the seed for reproducibility.
+Same seed = same random sequence.</p>
+<pre><code class="language-python">random.seed(<span class="hljs-number">42</span>)
+</code></pre>
+<p>Use this when you're debugging or want deterministic output.</p>
+
+            
+            
+        </body>
+        </html>
