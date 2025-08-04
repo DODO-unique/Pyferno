@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x1f30c; Python&CloseCurlyQuote;s &DiacriticalGrave;os&DiacriticalGrave; Module</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <p>For reference purposes</p>
+<hr>
+<h1 id="-pythons-os-module">🌌 Python’s <code>os</code> Module</h1>
+<blockquote>
+<p><strong><code>os</code> is Python’s interface to the operating system.</strong>
+Access the filesystem, environment, users, and process layer — all with one import.</p>
+</blockquote>
+<hr>
+<h2 id="-1-filesystem--paths">📁 1. Filesystem &amp; Paths</h2>
+<h3 id="-basic-ops">🔹 Basic Ops</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>os.getcwd()</code></td>
+<td>Get current working directory</td>
+</tr>
+<tr>
+<td><code>os.chdir(path)</code></td>
+<td>Change current working directory</td>
+</tr>
+<tr>
+<td><code>os.listdir(path)</code></td>
+<td>List contents of a directory</td>
+</tr>
+<tr>
+<td><code>os.makedirs(path)</code></td>
+<td>Recursively create directories</td>
+</tr>
+<tr>
+<td><code>os.remove(file)</code></td>
+<td>Delete a file (not folders)</td>
+</tr>
+<tr>
+<td><code>os.rmdir(path)</code></td>
+<td>Delete an <strong>empty</strong> directory</td>
+</tr>
+<tr>
+<td><code>os.rename(src, dst)</code></td>
+<td>Rename or move file/folder</td>
+</tr>
+<tr>
+<td><code>os.stat(path)</code></td>
+<td>Get file metadata (size, mtime, etc)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🔥 To delete folders with content, use:
+<code>shutil.rmtree(path)</code></p>
+</blockquote>
+<hr>
+<h3 id="-path-handling-ospath">🔹 Path Handling (<code>os.path</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>exists(path)</code></td>
+<td>Path exists?</td>
+</tr>
+<tr>
+<td><code>isfile(path)</code></td>
+<td>Is it a file?</td>
+</tr>
+<tr>
+<td><code>isdir(path)</code></td>
+<td>Is it a directory?</td>
+</tr>
+<tr>
+<td><code>abspath(path)</code></td>
+<td>Absolute path</td>
+</tr>
+<tr>
+<td><code>relpath(path, start)</code></td>
+<td>Path relative to another</td>
+</tr>
+<tr>
+<td><code>realpath(path)</code></td>
+<td>Resolve symbolic links</td>
+</tr>
+<tr>
+<td><code>normpath(path)</code></td>
+<td>Normalize path (remove <code>..</code>, <code>.</code> etc.)</td>
+</tr>
+<tr>
+<td><code>normcase(path)</code></td>
+<td>Normalize case + separators (Windows only)</td>
+</tr>
+<tr>
+<td><code>join(*paths)</code></td>
+<td>Safely join path components</td>
+</tr>
+<tr>
+<td><code>basename(path)</code></td>
+<td>Final component of path</td>
+</tr>
+<tr>
+<td><code>dirname(path)</code></td>
+<td>Directory portion of path</td>
+</tr>
+<tr>
+<td><code>split(path)</code></td>
+<td>Tuple: (<code>dirname</code>, <code>basename</code>)</td>
+</tr>
+<tr>
+<td><code>splitext(path)</code></td>
+<td>Tuple: (<code>filename</code>, <code>extension</code>)</td>
+</tr>
+<tr>
+<td><code>commonpath(paths)</code></td>
+<td>Longest shared subpath in a list</td>
+</tr>
+<tr>
+<td><code>sep</code></td>
+<td>Path separator (<code>/</code> or <code>\\</code>)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🔧 Use <code>os.path.abspath(__file__)</code> to get the <strong>full path to your current script</strong>.
+Useful when navigating relative directories safely.</p>
+</blockquote>
+<hr>
+<h3 id="-special-mentions">🔍 Special Mentions</h3>
+<ul>
+<li><code>os.walk(path)</code> — Recursively yield <code>(root, dirs, files)</code></li>
+<li><code>os.scandir(path)</code> — Like <code>listdir()</code>, but returns objects with <code>.stat()</code>, <code>.is_dir()</code></li>
+<li><code>os.path.islink(path)</code> — Is this a symbolic link?</li>
+<li><code>os.readlink(path)</code> — Get target of a symlink</li>
+<li><code>os.symlink(src, dst)</code> — Create symbolic link (Admin/root permission on Windows)</li>
+</ul>
+<hr>
+<h2 id="-2-environment-variables">🌱 2. Environment Variables</h2>
+<pre><code class="language-python">os.environ[<span class="hljs-string">&quot;MY_SECRET&quot;</span>] = <span class="hljs-string">&quot;123&quot;</span>             <span class="hljs-comment"># Set variable (temporary)</span>
+<span class="hljs-built_in">print</span>(os.environ.get(<span class="hljs-string">&quot;HOME&quot;</span>, <span class="hljs-string">&quot;Not set&quot;</span>))    <span class="hljs-comment"># Read variable safely</span>
+</code></pre>
+<ul>
+<li><code>os.environ</code> behaves like a dict</li>
+<li>⚠️ <strong>Changes apply only to the current process</strong></li>
+<li>Use for config, secrets, flags, etc.</li>
+</ul>
+<hr>
+<h2 id="-3-user--platform-info">🧑‍💻 3. User &amp; Platform Info</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>os.getlogin()</code></td>
+<td>Current logged-in user</td>
+</tr>
+<tr>
+<td><code>os.getuid()</code></td>
+<td>User ID (Unix only)</td>
+</tr>
+<tr>
+<td><code>os.name</code></td>
+<td>OS type: <code>'posix'</code>, <code>'nt'</code></td>
+</tr>
+<tr>
+<td><code>os.uname()</code></td>
+<td>System info (Unix only)</td>
+</tr>
+<tr>
+<td><code>os.path.sep</code></td>
+<td>Path separator (<code>/</code>, <code>\\</code>)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 Use <code>platform.system()</code> / <code>platform.release()</code> for more readable info</p>
+</blockquote>
+<hr>
+<h2 id="️-4-process-management">⚙️ 4. Process Management</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>os.system(cmd)</code></td>
+<td>Run shell command (basic, blocking)</td>
+</tr>
+<tr>
+<td><code>os.getpid()</code></td>
+<td>Get current process ID</td>
+</tr>
+<tr>
+<td><code>os.fork()</code></td>
+<td>Fork the current process (Unix only)</td>
+</tr>
+<tr>
+<td><code>os.execvp(...)</code></td>
+<td>Replace current process with a new one</td>
+</tr>
+<tr>
+<td><code>os.kill(pid, sig)</code></td>
+<td>Send signal to another process</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🛑 For modern scripting, prefer:</p>
+</blockquote>
+<pre><code class="language-python"><span class="hljs-keyword">import</span> subprocess
+subprocess.run([<span class="hljs-string">&quot;ls&quot;</span>, <span class="hljs-string">&quot;-l&quot;</span>])
+</code></pre>
+<hr>
+<h2 id="-test-snippet-os_testpy">🧪 Test Snippet: <code>os_test.py</code></h2>
+<pre><code class="language-python"><span class="hljs-keyword">import</span> os
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Current dir: <span class="hljs-subst">{os.getcwd()}</span>&quot;</span>)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nDirectory contents:&quot;</span>)
+<span class="hljs-keyword">for</span> entry <span class="hljs-keyword">in</span> os.listdir():
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot; -&quot;</span>, entry)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nAbsolute path of this file:&quot;</span>)
+<span class="hljs-built_in">print</span>(os.path.abspath(__file__))
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nEnvironment HOME:&quot;</span>)
+<span class="hljs-built_in">print</span>(os.environ.get(<span class="hljs-string">&quot;HOME&quot;</span>, <span class="hljs-string">&quot;Not Set&quot;</span>))
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nPlatform type:&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Windows&quot;</span> <span class="hljs-keyword">if</span> os.name == <span class="hljs-string">&quot;nt&quot;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;Unix-like&quot;</span>)
+</code></pre>
+<hr>
+<h2 id="-bonus-when-to-use-what">🧩 Bonus: When to Use What?</h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Prefer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Copy/delete entire folders</td>
+<td><code>shutil</code> module</td>
+</tr>
+<tr>
+<td>Safer shell execution</td>
+<td><code>subprocess.run()</code></td>
+</tr>
+<tr>
+<td>Cross-platform sys info</td>
+<td><code>platform</code> module</td>
+</tr>
+<tr>
+<td>Path handling (modern)</td>
+<td><code>pathlib.Path</code></td>
+</tr>
+<tr>
+<td>Path joining (legacy)</td>
+<td><code>os.path.join(...)</code></td>
+</tr>
+<tr>
+<td>Script-relative paths</td>
+<td><code>os.path.dirname(__file__)</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="-summary">✅ Summary</h2>
+<ul>
+<li><code>os</code> is your bridge to the shell, filesystem, and system-level metadata.</li>
+<li><code>os.path</code> is essential for cross-platform path logic.</li>
+<li><code>shutil</code>, <code>subprocess</code>, and <code>pathlib</code> are modern, high-level alternatives.</li>
+<li>Avoid raw string-based path hacks. Use proper functions — they're battle-tested.</li>
+</ul>
+<hr>
+<hr>
+
+            
+            
+        </body>
+        </html>
