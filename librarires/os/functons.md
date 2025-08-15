@@ -141,3 +141,70 @@ Basic Ops:
     * `st_uid`, `st_gid` → owner info (Unix)
 
 
+Path Handling (os.path)
+
+1. `os.path.exists(path)`
+
+    > **Does this path exist, yes or no?**  
+    > Returns `True` if `file`, `dir`, symlink, anything exists at the path.
+
+    ```python
+    os.path.exists("folder/file.txt")  # True or False
+    ```
+
+    Follows symlinks. Broken ones return `False`.
+
+
+2. `os.path.isfile(path)`
+
+    > **Is this path a regular file?**
+
+    Returns `True` **only if** the path exists **and** is a **file**, not a dir, not a symlink (unless it points to a file).
+
+    ```python
+    os.path.isfile("notes.txt")  # ✅
+    os.path.isfile("some_folder")  # ❌
+    ```
+
+    Follows symlinks. If it's a symlink *to a file*, returns `True`.
+
+3. `os.path.isdir(path)`
+
+    > **Is this path a directory?**
+
+    Returns `True` if the path exists **and** is a directory.
+
+    ```python
+    os.path.isdir("C:/Users/victo/Documents")  # ✅
+    os.path.isdir("notes.txt")  # ❌
+    ```
+
+    * Follows symlinks — so if it's a symlink **to a folder**, returns `True`.
+    * Combine with `exists()` if you want to handle broken symlinks more strictly.
+
+4. `os.path.abspath(path)`
+
+    > **Converts a relative path to an absolute one.**  
+    > “Where *exactly* is this, from root?”
+
+    ```python
+    os.path.abspath("..")  
+    # → 'C:\\Users\\victo\\codes_real' (example)
+    ```
+
+    * It **doesn’t check** if the path exists. It just *calculates* it.
+    * Useful when you're working in nested scripts and want clarity.
+
+5. relpath(path, sample)
+
+    This gives the relative path to a sample, like:
+    ```python
+    root = r"C:\Users\victo\codes_real\making\python"
+    print(os.path.relpath(r'C:\Users\victo\codes_real\making\python\librarires\os\basics.md', root))
+    
+    # -> librarires\os\basics.md
+    ```
+
+6. realpath(path)
+   
+   This resolves symlinks
