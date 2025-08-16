@@ -55,12 +55,68 @@ for example:
         output: Node('Victor')
 So, though it is a string, it is shown that it is a string (and not just an object file or some sneaky, sussy generator expression 👀)
 '''
+
+'''
+Memory and Performance
+Python by default stores it's objects as __dict__, so when accessing attributes (baby raccoons read: an instance's variables 🧍‍♂️) they store values dynamically even if not defined in the __init__ (other static OOPs languages hiss at you if you do that)
+This naturally increases the space consumed; to avoid this, and create actual C arrays (so faster lookups, saved space), we use __slots__ = ('data', 'next')
+'''
+
+'''
+Mutability: 
+Linked Lists are mutable, and if you think abuot it, a link list could be this: 3 -> [2,3,4] -> (3,5)
+Here, the elements on the edge are immutable, so changing their values would mean rebinding; the middle element is mutable, so it does not really matter if you change it
+The real understanding here is, that though you are changing each data type by changing Node.data, you are still changing *within* the same data structure which itself is mutable, even though their elements are mutable. This is a important understanding since it kind of aligns with what we learn in lists since they work similarly.
+In a list, you'd change a immutable element but that does not mean a new instance of a list is created.
+
+Thus, __eq__ (equality) is identity-based (through `is`), not content-based
+'''
+
+
+'''
+Garbage Collection:
+Simply, GC works when refcount drops to 0. 
+The issue is when there are cyclic processes (refer to each other but no one points at them) are never noticed since their refcount never hits 0.
+Theoretically, such processes are garbage since nothing points at them (they are hard to reach until you refer them from their own address).
+You can have similar cyclic processes in linked lists, when you make the Null pointer point to the head of the list- this creates a cyclic process.
+This also makes for a classic CS problem, 'Check if a linked list is cyclic' (simply checking for a Null pointer won't work since it would keep iterating)
+As for Cyclic GC, these kill such cyclic processes periodically 
+also, a rabbit hole here 👀
+A CGC (cyclic garbage collecter) breaks when you use __del__ inside the cycle because python does not know in what order the destructor should be used without side-effects (because cyclic processes can be pretty subjective, if you think abou it)
+'''
+
+'''
+Typing:
+Python types dynamically (so the data types are resolved on runtime), this means if Linked Lists contain heterogenous objects, some actions won't work (like doing a sum) because let's be real, why should they, logically?
+To avoid any caveats, you can add typing discipline from the typing library.
+'''
+'''
+A big one:
+I would add this in the main folders but hear me our carefully: __new__ comes first when a function is called- this is the true constructor, the second function is __init__ which initializes by assigning attributes.
+so you can do this in your code:
+class Trickster:
+    def __new__(cls):
+        print("haha nope, you get a dict")
+        return {}
+    def __init__(self):
+        print("you’ll never see this")
+
+This gives output of:
+t = Trickster()
+print(type(t))  # dict 
+'''
+
 ```
 
 ```python
 class LinkedList:
     def __init__(self):
         self.head = None
+    '''
+    here, self.head is declared dynamically here, so you can call obj.head (and it gives None until you don't define it)
+    you define it by obj.head = nomnom, like that
+    also, note that self means the object name and it all gets synonymous, and you no more have to define it during the instance definition
+    '''
 
     def append(self, data):
         """Add a node at the end."""
