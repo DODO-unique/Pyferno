@@ -18,8 +18,9 @@ class Node:
         self.next = None      # pointer to the next node
 
     def __repr__(self):
-        return f"Node({self.data})"
-
+        # note that you can't print non-string values here, also !r shows __str__ as __repr__ so you know when a string is being passed. Good practice to use that.
+        return f'{self.data!r}'
+    
 '''
 class Node:
     def __init__(self, data, next=None):
@@ -119,52 +120,83 @@ class LinkedList:
     '''
 
     def append(self, data):
-        """Add a node at the end."""
-        new_node = Node(data)
+        # if you are appending the first element? Head would still be None
         if not self.head:
-            self.head = new_node
+            # we will add head as a Node, so it is not None anymore (if you are wondering if the class would retain this self.head(and not reset it to None), then know that this would be in an instance's schema, it is saved for the instance, and the init won't be called anymore again until you explicitly create a new instance of the same class 👀)
+            self.head = Node(data)
+            # since we are done creating a node, return and end this function right here 
             return
+        
+        # no? Then we will have to do two things: one, add a node, then give the node's address to the Null pointer
+        # note how here, the node itself, by default, has new_node.next to None as we are defining a new instance, meaning the init runs over again once.
+        new_node = Node(data)
+        # now for step two, we have to go to the last pointer (Null Pointer) which we can go to by iteration
+        # let's decide what is the current- naturally, the current would have to start from the head
         current = self.head
+        # we iterate till current.next becomes None. The moment it hits None, it become falsey and while ends- so we are at the last element
         while current.next:
+            # see how we are changing the current itself, so when the while ends, the current is spiritually the last node
             current = current.next
+        # now, we just modify the next of the current node to point at the new node.
         current.next = new_node
 
-    def prepend(self, data):
-        """Add a node at the start."""
-        new_node = Node(data)
-        new_node.next = self.head
-        self.head = new_node
-
-    def find(self, data):
-        """Return first node with given data, else None."""
+    def print_traverse(self):
+        # this is easy, you just have to iterate till you hit the Null pointer
         current = self.head
-        while current:
-            if current.data == data:
-                return current
+
+        while current.next:
+            # note that here, repr prints non-human readable objects, you'd have to have a __repr__ class in your relevant class
+            print(repr(current), end=' -> ')
             current = current.next
-        return None
+        print(repr(current))
+    
+    def insert(self, data, index):
+        # if no list?
+        if not self.head:
+            self.head = Node(data)
+            print("No list, made one for you 🦝")
+            return
+        
+        # let's add a node first
+        new_node = Node(data)
+
+        # we move to the index now
+        current = self.head
+        for _ in range(index-1):
+            current = current.next
+            # if current.next is None, then we have reached the end of the list
+            if not current.next:
+                print('Reached the end of the list')
+                return
+        # copy the pointer to the new node's
+        new_node.next = current.next
+        # then assign the new value to the node
+        current.next = new_node
+        
 
     def delete(self, data):
-        """Delete first occurrence of data."""
-        if not self.head:
-            return
-        if self.head.data == data:
-            self.head = self.head.next
-            return
+        """This node deletes the first occurrence by value"""
         current = self.head
-        while current.next:
-            if current.next.data == data:
-                current.next = current.next.next
-                return
+        # while current.next:
+        #     prev = current.next
+        #     # print('prev: ', current.prev)
+        #     # print('of this', self.print_traverse())
+        #     current = current.next
+        #     if current.data == data:
+        #         # print('stopped here', current.data, current.prev, current.next)
+        #         prev.next = current
+        #         # current.next = None
+        #         # print('stopped here', current.data, current.prev, current.next)
+        #         return
+        if current and current.data == data:
+            # if the first element is 
+            self.head = current.next
+            return
+
+        # we are avoiding current being None so we can avoid AttributeErrors
+        while current and current.data != data:
+            prev = current
             current = current.next
 
-    def __repr__(self):
-        nodes = []
-        current = self.head
-        while current:
-            nodes.append(repr(current))
-            current = current.next
-        return " -> ".join(nodes)
+        prev.next = current.next
 ```
-
-
