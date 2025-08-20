@@ -223,7 +223,7 @@ f.read(<span class="hljs-number">10</span>)     <span class="hljs-comment"># nex
 f.readline()   <span class="hljs-comment"># next line</span>
 f.readlines()  <span class="hljs-comment"># list of all lines</span>
 </code></pre>
-<p><strong>No, there’s no <code>.readwords()</code>.</strong>
+<p><strong>No, there’s no <code>.readwords()</code>.</strong> <br>
 If you want words:</p>
 <pre><code class="language-python">words = f.read().split()
 </code></pre>
@@ -253,7 +253,7 @@ f.writelines([<span class="hljs-string">&quot;a\n&quot;</span>, <span class="hlj
 </ul>
 </li>
 </ul>
-<p>⚠️ With <code>&quot;w&quot;</code>: file is truncated immediately → <code>seek()</code> can’t “rescue” old data.
+<p>⚠️ With <code>&quot;w&quot;</code>: file is truncated immediately → <code>seek()</code> can’t “rescue” old data. <br>
 ⚠️ With <code>&quot;a&quot;</code>: writing cursor always forced to end → <code>seek()</code> only affects reads.</p>
 <hr>
 <h3 id="5-binary-modes">5. Binary Modes</h3>
@@ -280,8 +280,8 @@ f.writelines([<span class="hljs-string">&quot;a\n&quot;</span>, <span class="hlj
 </ul>
 <hr>
 <p>Behind the Scenes w Virgil:</p>
-<p>Victor: Yeah, like why one-eyed 🧍‍♂️
-Virgil: Because it can see all the file but can't write anywhere else... so... like half-seeking = one-eyed 🧍‍♂️</p>
+<p>Victor: Yeah, like why one-eyed 🧍‍♂️<br>
+  Virgil: Because it can see all the file but can't write anywhere else... so... like half-seeking = one-eyed 🧍‍♂️</p>
 
             
             
