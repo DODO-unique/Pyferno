@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x1f4dd; Python File Handling &lpar;Raccoon Edition&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="-python-file-handling-raccoon-edition">📝 Python File Handling (Raccoon Edition)</h1>
+<h3 id="1-modes-text">1. Modes (Text)</h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Meaning</th>
+<th>Creates File?</th>
+<th>Error if Missing?</th>
+<th>Cursor Start</th>
+<th>Cursor Rules</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&quot;r&quot;</code></td>
+<td>Read only</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+<td>Start</td>
+<td>Can <code>seek()</code></td>
+</tr>
+<tr>
+<td><code>&quot;w&quot;</code></td>
+<td>Write (overwrite)</td>
+<td>✅ Yes</td>
+<td>❌ No</td>
+<td>Start</td>
+<td>⚠️ Always erases; <code>seek()</code> useless (file truncated first)</td>
+</tr>
+<tr>
+<td><code>&quot;a&quot;</code></td>
+<td>Append</td>
+<td>✅ Yes</td>
+<td>❌ No</td>
+<td>End</td>
+<td>Cursor forced to end, <code>seek()</code> ignored for writing</td>
+</tr>
+<tr>
+<td><code>&quot;x&quot;</code></td>
+<td>Create new (exclusive)</td>
+<td>✅ Yes</td>
+<td>✅ If exists</td>
+<td>Start</td>
+<td>Same as <code>w</code> (new only)</td>
+</tr>
+<tr>
+<td><code>&quot;r+&quot;</code></td>
+<td>Read + Write</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+<td>Start</td>
+<td>Can <code>seek()</code>, overwrites from cursor</td>
+</tr>
+<tr>
+<td><code>&quot;w+&quot;</code></td>
+<td>Write + Read (overwrite)</td>
+<td>✅ Yes</td>
+<td>❌ No</td>
+<td>Start</td>
+<td>⚠️ Erases existing, then can read/seek</td>
+</tr>
+<tr>
+<td><code>&quot;a+&quot;</code></td>
+<td>Append + Read</td>
+<td>✅ Yes</td>
+<td>❌ No</td>
+<td>End</td>
+<td>Reads anywhere, but writes <em>always at end</em></td>
+</tr>
+</tbody>
+</table>
+<p>🔑 <strong>Raccoon Notes:</strong></p>
+<ul>
+<li><code>&quot;w&quot;</code> &amp; <code>&quot;w+&quot;</code> are scorched earth: file is nuked <strong>before</strong> you touch it.</li>
+<li><code>&quot;a&quot;</code> &amp; <code>&quot;a+&quot;</code> will <em>always</em> shove the cursor to the end for writing (append is append).</li>
+<li><code>&quot;r&quot;</code> &amp; <code>&quot;r+&quot;</code> scream if the file isn’t there.</li>
+</ul>
+<hr>
+<h3 id="2-reading">2. Reading</h3>
+<pre><code class="language-python">f.read()       <span class="hljs-comment"># entire file (string)</span>
+f.read(<span class="hljs-number">10</span>)     <span class="hljs-comment"># next 10 chars</span>
+f.readline()   <span class="hljs-comment"># next line</span>
+f.readlines()  <span class="hljs-comment"># list of all lines</span>
+</code></pre>
+<p><strong>No, there’s no <code>.readwords()</code>.</strong>
+If you want words:</p>
+<pre><code class="language-python">words = f.read().split()
+</code></pre>
+<p>Iterating line by line:</p>
+<pre><code class="language-python"><span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f:
+    <span class="hljs-keyword">for</span> word <span class="hljs-keyword">in</span> line.split():
+        <span class="hljs-built_in">print</span>(word)
+</code></pre>
+<hr>
+<h3 id="3-writing">3. Writing</h3>
+<pre><code class="language-python">f.write(<span class="hljs-string">&quot;hello\n&quot;</span>)                <span class="hljs-comment"># single string</span>
+f.writelines([<span class="hljs-string">&quot;a\n&quot;</span>, <span class="hljs-string">&quot;b\n&quot;</span>])      <span class="hljs-comment"># list of strings</span>
+</code></pre>
+<p>⚠️ <code>.write()</code> overwrites from cursor position — so watch your <code>seek()</code> in <code>r+</code>/<code>w+</code>.</p>
+<hr>
+<h3 id="4-cursor-pointer">4. Cursor (Pointer)</h3>
+<ul>
+<li>
+<p><code>f.tell()</code> → current byte position</p>
+</li>
+<li>
+<p><code>f.seek(offset, whence)</code> → move cursor</p>
+<ul>
+<li><code>whence=0</code>: from start (default)</li>
+<li><code>whence=1</code>: from current position</li>
+<li><code>whence=2</code>: from end</li>
+</ul>
+</li>
+</ul>
+<p>⚠️ With <code>&quot;w&quot;</code>: file is truncated immediately → <code>seek()</code> can’t “rescue” old data.
+⚠️ With <code>&quot;a&quot;</code>: writing cursor always forced to end → <code>seek()</code> only affects reads.</p>
+<hr>
+<h3 id="5-binary-modes">5. Binary Modes</h3>
+<p>Add <code>&quot;b&quot;</code> to any mode: <code>&quot;rb&quot;</code>, <code>&quot;wb&quot;</code>, <code>&quot;ab&quot;</code>, etc.</p>
+<ul>
+<li>Works with raw <strong>bytes</strong>, not text.</li>
+<li>Example:</li>
+</ul>
+<pre><code class="language-python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;image.png&quot;</span>, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> f:
+    data = f.read()  <span class="hljs-comment"># bytes object</span>
+
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;copy.png&quot;</span>, <span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> f:
+    f.write(data)
+</code></pre>
+<p>Use this for images, executables, <code>.db</code> files, etc.</p>
+<hr>
+<h3 id="6-quick-reference-mantras-">6. Quick Reference Mantras 🦝</h3>
+<ul>
+<li><strong>r</strong> → read, complain if missing.</li>
+<li><strong>w</strong> → wipe + overwrite.</li>
+<li><strong>a</strong> → always stack at the end.</li>
+<li><strong>+</strong> → do two things at once (read + write).</li>
+<li><strong>seek()</strong> → useless in <code>&quot;w&quot;</code>, one-eyed in <code>&quot;a&quot;</code>.</li>
+</ul>
+<hr>
+<p>Behind the Scenes w Virgil:</p>
+<p>Victor: Yeah, like why one-eyed 🧍‍♂️
+Virgil: Because it can see all the file but can't write anywhere else... so... like half-seeking = one-eyed 🧍‍♂️</p>
+
+            
+            
+        </body>
+        </html>
