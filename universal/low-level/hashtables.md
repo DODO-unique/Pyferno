@@ -1,4 +1,4 @@
-But this somewhere in the dictionaries or the sets to be sure. Or both, don't mind
+Put this somewhere in the dictionaries or the sets to be sure. Or both, don't mind
 
 
 This hashing is not cryptography hashing, remember that.
